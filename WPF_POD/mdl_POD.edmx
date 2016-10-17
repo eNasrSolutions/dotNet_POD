@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PODModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomreID" />
+          </Key>
+          <Property Name="CustomreID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ArName" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="EnName" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="31" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ActiveCustomer" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="ModDate" Type="datetime" Nullable="false" />
+          <Property Name="ModUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Docs">
+          <Key>
+            <PropertyRef Name="SessionDate" />
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="SessionDate" Type="datetime" Nullable="false" />
+          <Property Name="AttachmentID" Type="int" Nullable="false" />
+          <Property Name="DOCID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FileContents" Type="varbinary(max)" Nullable="false" />
+          <Property Name="FileExt" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Failed" Type="bit" Nullable="false" />
+          <Property Name="FailedError" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Uploaded" Type="bit" Nullable="false" />
+          <Property Name="UploadedCounter" Type="int" Nullable="false" />
+          <Property Name="SAP_FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModDate" Type="datetime" Nullable="false" />
+          <Property Name="ModUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="ReviewedBy" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="DriverID" />
+          </Key>
+          <Property Name="DriverID" Type="int" Nullable="false" />
+          <Property Name="TransporterID" Type="int" Nullable="false" />
+          <Property Name="ArName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Moduser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ModDate" Type="datetime" Nullable="false" />
+          <Property Name="SAP_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOG_DOCS">
+          <Key>
+            <PropertyRef Name="trDt" />
+            <PropertyRef Name="__$operation" />
+            <PropertyRef Name="SessionDate" />
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="trDt" Type="datetime" Nullable="false" />
+          <Property Name="__$operation" Type="int" Nullable="false" />
+          <Property Name="SessionDate" Type="datetime" Nullable="false" />
+          <Property Name="AttachmentID" Type="int" Nullable="false" />
+          <Property Name="DOCID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Moddate" Type="datetime" />
+          <Property Name="ModUser" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="LOG_SAP_DOCS_HDR">
+          <Key>
+            <PropertyRef Name="trDt" />
+            <PropertyRef Name="__$operation" />
+            <PropertyRef Name="DocID" />
+          </Key>
+          <Property Name="trDt" Type="datetime" Nullable="false" />
+          <Property Name="__$operation" Type="int" Nullable="false" />
+          <Property Name="DocID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DriverID" Type="int" />
+          <Property Name="Drvr_SAP_CODE" Type="nvarchar" MaxLength="10" />
+          <Property Name="DriverName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DriverMobile" Type="nvarchar" MaxLength="20" />
+          <Property Name="TransporterID" Type="int" />
+          <Property Name="Trns_SAP_CODE" Type="nvarchar" MaxLength="10" />
+          <Property Name="PlateNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="TrucksRelease" Type="datetime" />
+          <Property Name="CustomerRecieve" Type="datetime" />
+          <Property Name="ModUser" Type="nvarchar" MaxLength="20" />
+          <Property Name="ModDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SAP_DOCs_HDR">
+          <Key>
+            <PropertyRef Name="DocID" />
+          </Key>
+          <Property Name="DocID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PoNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="OrderNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DocDate" Type="datetime" Nullable="false" />
+          <Property Name="DocDateHijri" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PlantID" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="SourceID" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="CustomerID_Billto" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CustomerID_ShipTo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DriverID" Type="int" Nullable="false" />
+          <Property Name="PlateNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="TrucksRelease" Type="datetime" Nullable="false" />
+          <Property Name="CustomerRecieve" Type="datetime" Nullable="false" />
+          <Property Name="Completed" Type="bit" Nullable="false" />
+          <Property Name="ModUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ModDate" Type="datetime" Nullable="false" />
+          <Property Name="Trns_SAP_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Drvr_SAP_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TransporterID" Type="int" Nullable="false" />
+          <Property Name="DriverName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DriverMobile" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PGIDate" Type="smalldatetime" />
+          <Property Name="ExistsSAP" Type="bit" />
+          <Property Name="TrnsRefInv" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="ReviewedBy" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="OverNightReason" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transporter">
+          <Key>
+            <PropertyRef Name="TransporterID" />
+          </Key>
+          <Property Name="TransporterID" Type="int" Nullable="false" />
+          <Property Name="ArName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ModDate" Type="datetime" Nullable="false" />
+          <Property Name="ModUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SAP_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ReqInvCd" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransporterInvFile">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="SEQID" />
+          </Key>
+          <Property Name="Year" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SEQID" Type="int" Nullable="false" />
+          <Property Name="FileContents" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransporterInvHDR">
+          <Key>
+            <PropertyRef Name="year" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="year" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TransporterID" Type="int" Nullable="false" />
+          <Property Name="TransporterSAPCODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="InvoiceRefNo" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="TotalAmount" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AppAuth" Type="bit" Nullable="false" />
+          <Property Name="ResetPassword" Type="bit" Nullable="false" />
+          <Property Name="Lock" Type="bit" Nullable="false" />
+          <Property Name="LockCount" Type="int" Nullable="false" />
+          <Property Name="Admin" Type="bit" Nullable="false" />
+          <Property Name="Report" Type="bit" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ModDate" Type="datetime" Nullable="false" />
+          <Property Name="ModUser" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PODModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Docs" EntityType="Self.Docs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOG_DOCS" EntityType="Self.LOG_DOCS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOG_SAP_DOCS_HDR" EntityType="Self.LOG_SAP_DOCS_HDR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAP_DOCs_HDR" EntityType="Self.SAP_DOCs_HDR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transporter" EntityType="Self.Transporter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransporterInvFile" EntityType="Self.TransporterInvFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransporterInvHDR" EntityType="Self.TransporterInvHDR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PODModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities_POD" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="SAP_DOCs_HDR" EntityType="PODModel.SAP_DOCs_HDR" />
+          <EntitySet Name="Customers" EntityType="PODModel.Customer" />
+          <EntitySet Name="Drivers" EntityType="PODModel.Driver" />
+          <EntitySet Name="Transporters" EntityType="PODModel.Transporter" />
+          <EntitySet Name="LOG_DOCS" EntityType="PODModel.LOG_DOCS" />
+          <EntitySet Name="Docs" EntityType="PODModel.Doc" />
+          <EntitySet Name="Users" EntityType="PODModel.User" />
+          <EntitySet Name="LOG_SAP_DOCS_HDR" EntityType="PODModel.LOG_SAP_DOCS_HDR" />
+          <EntitySet Name="TransporterInvFiles" EntityType="PODModel.TransporterInvFile" />
+          <EntitySet Name="TransporterInvHDRs" EntityType="PODModel.TransporterInvHDR" />
+        </EntityContainer>
+        <EntityType Name="SAP_DOCs_HDR">
+          <Key>
+            <PropertyRef Name="DocID" />
+          </Key>
+          <Property Name="DocID" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="PoNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="OrderNo" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="DocDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DocDateHijri" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="PlantID" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+          <Property Name="SourceID" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+          <Property Name="CustomerID_Billto" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="CustomerID_ShipTo" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="DriverID" Type="Int32" Nullable="false" />
+          <Property Name="PlateNumber" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="TrucksRelease" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CustomerRecieve" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Completed" Type="Boolean" Nullable="false" />
+          <Property Name="ModUser" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="ModDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Trns_SAP_CODE" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Drvr_SAP_CODE" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="TransporterID" Type="Int32" Nullable="false" />
+          <Property Name="DriverName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DriverMobile" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="PGIDate" Type="DateTime" Precision="0" />
+          <Property Name="ExistsSAP" Type="Boolean" />
+          <Property Name="TrnsRefInv" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="ReviewedBy" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="OverNightReason" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomreID" />
+          </Key>
+          <Property Type="String" Name="CustomreID" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ArName" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EnName" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telephone" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Fax" Nullable="false" MaxLength="31" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ActiveCustomer" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ModDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="ModUser" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="DriverID" />
+          </Key>
+          <Property Type="Int32" Name="DriverID" Nullable="false" />
+          <Property Type="Int32" Name="TransporterID" Nullable="false" />
+          <Property Type="String" Name="ArName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EnName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Mobile" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Moduser" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ModDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="SAP_CODE" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Transporter">
+          <Key>
+            <PropertyRef Name="TransporterID" />
+          </Key>
+          <Property Type="Int32" Name="TransporterID" Nullable="false" />
+          <Property Type="String" Name="ArName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EnName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telephone" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ModDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="ModUser" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SAP_CODE" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ReqInvCd" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOG_DOCS">
+          <Key>
+            <PropertyRef Name="trDt" />
+            <PropertyRef Name="C___operation" />
+            <PropertyRef Name="SessionDate" />
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="trDt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="C___operation" Type="Int32" Nullable="false" />
+          <Property Name="SessionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AttachmentID" Type="Int32" Nullable="false" />
+          <Property Name="DOCID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Moddate" Type="DateTime" Precision="3" />
+          <Property Name="ModUser" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Doc">
+          <Key>
+            <PropertyRef Name="SessionDate" />
+            <PropertyRef Name="AttachmentID" />
+          </Key>
+          <Property Name="SessionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AttachmentID" Type="Int32" Nullable="false" />
+          <Property Name="DOCID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FileContents" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileExt" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Failed" Type="Boolean" Nullable="false" />
+          <Property Name="FailedError" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Uploaded" Type="Boolean" Nullable="false" />
+          <Property Name="UploadedCounter" Type="Int32" Nullable="false" />
+          <Property Name="SAP_FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModUser" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="ReviewedBy" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="Password" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="AppAuth" Nullable="false" />
+          <Property Type="Boolean" Name="ResetPassword" Nullable="false" />
+          <Property Type="Boolean" Name="Lock" Nullable="false" />
+          <Property Type="Int32" Name="LockCount" Nullable="false" />
+          <Property Type="Boolean" Name="Admin" Nullable="false" />
+          <Property Type="Boolean" Name="Report" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="DateTime" Name="ModDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="ModUser" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LOG_SAP_DOCS_HDR">
+          <Key>
+            <PropertyRef Name="trDt" />
+            <PropertyRef Name="C___operation" />
+            <PropertyRef Name="DocID" />
+          </Key>
+          <Property Type="DateTime" Name="trDt" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="C___operation" Nullable="false" />
+          <Property Type="String" Name="DocID" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="DriverID" />
+          <Property Type="String" Name="Drvr_SAP_CODE" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DriverName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DriverMobile" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="TransporterID" />
+          <Property Type="String" Name="Trns_SAP_CODE" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PlateNumber" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="TrucksRelease" Precision="3" />
+          <Property Type="DateTime" Name="CustomerRecieve" Precision="3" />
+          <Property Type="String" Name="ModUser" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ModDate" Precision="3" />
+        </EntityType>
+        <EntityType Name="TransporterInvFile">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="SEQID" />
+          </Key>
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SEQID" Type="Int32" Nullable="false" />
+          <Property Name="FileContents" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TransporterInvHDR">
+          <Key>
+            <PropertyRef Name="year" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TransporterID" Type="Int32" Nullable="false" />
+          <Property Name="TransporterSAPCODE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceRefNo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PODModelStoreContainer" CdmEntityContainer="Entities_POD">
+          <EntitySetMapping Name="SAP_DOCs_HDR">
+            <EntityTypeMapping TypeName="PODModel.SAP_DOCs_HDR">
+              <MappingFragment StoreEntitySet="SAP_DOCs_HDR">
+                <ScalarProperty Name="DocID" ColumnName="DocID" />
+                <ScalarProperty Name="PoNumber" ColumnName="PoNumber" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+                <ScalarProperty Name="DocDateHijri" ColumnName="DocDateHijri" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+                <ScalarProperty Name="SourceID" ColumnName="SourceID" />
+                <ScalarProperty Name="CustomerID_Billto" ColumnName="CustomerID_Billto" />
+                <ScalarProperty Name="CustomerID_ShipTo" ColumnName="CustomerID_ShipTo" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="PlateNumber" ColumnName="PlateNumber" />
+                <ScalarProperty Name="TrucksRelease" ColumnName="TrucksRelease" />
+                <ScalarProperty Name="CustomerRecieve" ColumnName="CustomerRecieve" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="ModUser" ColumnName="ModUser" />
+                <ScalarProperty Name="ModDate" ColumnName="ModDate" />
+                <ScalarProperty Name="Trns_SAP_CODE" ColumnName="Trns_SAP_CODE" />
+                <ScalarProperty Name="Drvr_SAP_CODE" ColumnName="Drvr_SAP_CODE" />
+                <ScalarProperty Name="TransporterID" ColumnName="TransporterID" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="DriverMobile" ColumnName="DriverMobile" />
+                <ScalarProperty Name="PGIDate" ColumnName="PGIDate" />
+                <ScalarProperty Name="ExistsSAP" ColumnName="ExistsSAP" />
+                <ScalarProperty Name="TrnsRefInv" ColumnName="TrnsRefInv" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ReviewedBy" ColumnName="ReviewedBy" />
+                <ScalarProperty Name="OverNightReason" ColumnName="OverNightReason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PODModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ModUser" ColumnName="ModUser" />
+                <ScalarProperty Name="ModDate" ColumnName="ModDate" />
+                <ScalarProperty Name="ActiveCustomer" ColumnName="ActiveCustomer" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="EnName" ColumnName="EnName" />
+                <ScalarProperty Name="ArName" ColumnName="ArName" />
+                <ScalarProperty Name="CustomreID" ColumnName="CustomreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="PODModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="SAP_CODE" ColumnName="SAP_CODE" />
+                <ScalarProperty Name="ModDate" ColumnName="ModDate" />
+                <ScalarProperty Name="Moduser" ColumnName="Moduser" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="EnName" ColumnName="EnName" />
+                <ScalarProperty Name="ArName" ColumnName="ArName" />
+                <ScalarProperty Name="TransporterID" ColumnName="TransporterID" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transporters">
+            <EntityTypeMapping TypeName="PODModel.Transporter">
+              <MappingFragment StoreEntitySet="Transporter">
+                <ScalarProperty Name="ReqInvCd" ColumnName="ReqInvCd" />
+                <ScalarProperty Name="SAP_CODE" ColumnName="SAP_CODE" />
+                <ScalarProperty Name="ModUser" ColumnName="ModUser" />
+                <ScalarProperty Name="ModDate" ColumnName="ModDate" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="EnName" ColumnName="EnName" />
+                <ScalarProperty Name="ArName" ColumnName="ArName" />
+                <ScalarProperty Name="TransporterID" ColumnName="TransporterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOG_DOCS">
+            <EntityTypeMapping TypeName="PODModel.LOG_DOCS">
+              <MappingFragment StoreEntitySet="LOG_DOCS">
+                <ScalarProperty Name="ModUser" ColumnName="ModUser" />
+                <ScalarProperty Name="Moddate" ColumnName="Moddate" />
+                <ScalarProperty Name="DOCID" ColumnName="DOCID" />
+                <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
+                <ScalarProperty Name="SessionDate" ColumnName="SessionDate" />
+                <ScalarProperty Name="C___operation" ColumnName="__$operation" />
+                <ScalarProperty Name="trDt" ColumnName="trDt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Docs">
+            <EntityTypeMapping TypeName="PODModel.Doc">
+              <MappingFragment StoreEntitySet="Docs">
+                <ScalarProperty Name="ReviewedBy" ColumnName="ReviewedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ModUser" ColumnName="ModUser" />
+                <ScalarProperty Name="ModDate" ColumnName="ModDate" />
+                <ScalarProperty Name="SAP_FileName" ColumnName="SAP_FileName" />
+                <ScalarProperty Name="UploadedCounter" ColumnName="UploadedCounter" />
+                <ScalarProperty Name="Uploaded" ColumnName="Uploaded" />
+                <ScalarProperty Name="FailedError" ColumnName="FailedError" />
+                <ScalarProperty Name="Failed" ColumnName="Failed" />
+                <ScalarProperty Name="FileExt" ColumnName="FileExt" />
+                <ScalarProperty Name="FileContents" ColumnName="FileContents" />
+                <ScalarProperty Name="DOCID" ColumnName="DOCID" />
+                <ScalarProperty Name="AttachmentID" ColumnName="AttachmentID" />
+                <ScalarProperty Name="SessionDate" ColumnName="SessionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PODModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ModUser" ColumnName="ModUser" />
+                <ScalarProperty Name="ModDate" ColumnName="ModDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Report" ColumnName="Report" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="LockCount" ColumnName="LockCount" />
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
+                <ScalarProperty Name="ResetPassword" ColumnName="ResetPassword" />
+                <ScalarProperty Name="AppAuth" ColumnName="AppAuth" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOG_SAP_DOCS_HDR">
+            <EntityTypeMapping TypeName="PODModel.LOG_SAP_DOCS_HDR">
+              <MappingFragment StoreEntitySet="LOG_SAP_DOCS_HDR">
+                <ScalarProperty Name="ModDate" ColumnName="ModDate" />
+                <ScalarProperty Name="ModUser" ColumnName="ModUser" />
+                <ScalarProperty Name="CustomerRecieve" ColumnName="CustomerRecieve" />
+                <ScalarProperty Name="TrucksRelease" ColumnName="TrucksRelease" />
+                <ScalarProperty Name="PlateNumber" ColumnName="PlateNumber" />
+                <ScalarProperty Name="Trns_SAP_CODE" ColumnName="Trns_SAP_CODE" />
+                <ScalarProperty Name="TransporterID" ColumnName="TransporterID" />
+                <ScalarProperty Name="DriverMobile" ColumnName="DriverMobile" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="Drvr_SAP_CODE" ColumnName="Drvr_SAP_CODE" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="DocID" ColumnName="DocID" />
+                <ScalarProperty Name="C___operation" ColumnName="__$operation" />
+                <ScalarProperty Name="trDt" ColumnName="trDt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransporterInvFiles">
+            <EntityTypeMapping TypeName="PODModel.TransporterInvFile">
+              <MappingFragment StoreEntitySet="TransporterInvFile">
+                <ScalarProperty Name="FileContents" ColumnName="FileContents" />
+                <ScalarProperty Name="SEQID" ColumnName="SEQID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransporterInvHDRs">
+            <EntityTypeMapping TypeName="PODModel.TransporterInvHDR">
+              <MappingFragment StoreEntitySet="TransporterInvHDR">
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="InvoiceRefNo" ColumnName="InvoiceRefNo" />
+                <ScalarProperty Name="TransporterSAPCODE" ColumnName="TransporterSAPCODE" />
+                <ScalarProperty Name="TransporterID" ColumnName="TransporterID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
